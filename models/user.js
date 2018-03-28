@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt');
  * Export model functions as a module
  * ===========================================
  */
-module.exports = (db) => {
+module.exports = (dbPool) => {
+  // `dbPool` is accessible within this function scope
   return {
     create: (user, callback) => {
       // run user input password through bcrypt to obtain hashed password
@@ -21,7 +22,7 @@ module.exports = (db) => {
         ];
 
         // execute query
-        db.query(queryString, values, (error, queryResult) => {
+        dbPool.query(queryString, values, (error, queryResult) => {
           // invoke callback function with results after query has executed
           callback(error, queryResult);
         });
@@ -34,7 +35,7 @@ module.exports = (db) => {
       const values = [id];
 
       // execute query
-      db.query(queryString, values, (error, queryResult) => {
+      dbPool.query(queryString, values, (error, queryResult) => {
         // invoke callback function with results after query has executed
         callback(error, queryResult);
       });
