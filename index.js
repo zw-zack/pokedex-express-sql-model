@@ -5,12 +5,6 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const db = require('./db');
 
-/**
- * ===================================
- * Configurations and set up
- * ===================================
- */
-
 // Init express app
 const app = express();
 
@@ -23,11 +17,6 @@ app.use(cookieParser());
 app.engine('handlebars', handlebars.create().engine);
 app.set('view engine', 'handlebars');
 
-/**
- * ===================================
- * Routes
- * ===================================
- */
 
 // Import routes to match incoming requests
 require('./routes')(app, db);
@@ -39,7 +28,7 @@ app.get('/', (request, response) => {
 
   db.pool.query('SELECT * FROM pokemons', (error, queryResult) => {
     if (error) console.error('error!', error);
-
+    
     let context = {
       loggedIn: loggedIn,
       username: username,

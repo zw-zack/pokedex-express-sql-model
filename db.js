@@ -5,7 +5,7 @@ const user = require('./models/user');
 const configs = {
   user: 'postgres',
   host: '127.0.0.1',
-  database: 'pokemons',
+  database: 'pokemodel',
   port: 5432
 };
 

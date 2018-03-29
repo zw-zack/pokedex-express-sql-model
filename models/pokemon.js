@@ -6,10 +6,12 @@
 module.exports = (dbPool) => {
   // `dbPool` is accessible within this function scope
   return {
+    update: (pokemon, callback) => {
+      const queryString = ''
+    }
     create: (pokemon, callback) => {
       // set up query
-      const queryString = `INSERT INTO pokemons (name, num, img, weight, height)
-        VALUES ($1, $2, $3, $4, $5)`;
+      const queryString = 'INSERT INTO pokemons (name, num, img, weight, height) VALUES ($1, $2, $3, $4, $5)';
       const values = [
         pokemon.name,
         pokemon.num,

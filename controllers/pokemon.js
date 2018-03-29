@@ -3,7 +3,7 @@
  * Controller logic
  * ===========================================
  */
-const get = (db) => {
+ const get = (db) => {
   return (request, response) => {
     // use pokemon model method `get` to retrieve pokemon data
     db.pokemon.get(request.params.id, (error, queryResult) => {
@@ -21,7 +21,17 @@ const get = (db) => {
 
 const updateForm = (db) => {
   return (request, response) => {
-    // TODO: Add logic here
+    const queryString = 'SELECT * from pokemons WHERE id = $1'
+    const values = [request.params.id];
+    console.log(db);
+    db.pool.options.query(queryString, values, (error, queryResult)=>{
+      if (error){
+        console.error('query error: ', err.stack);
+      } else{
+        response.render('pokemon/edit', {pokemon: queryResult.rows[0]})
+      }
+    });    // TODO: Add logic here
+
   };
 };
 
@@ -65,7 +75,7 @@ const create = (db) => {
  * Export controller functions as a module
  * ===========================================
  */
-module.exports = {
+ module.exports = {
   get,
   updateForm,
   update,
