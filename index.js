@@ -28,7 +28,7 @@ app.get('/', (request, response) => {
 
   db.pool.query('SELECT * FROM pokemons', (error, queryResult) => {
     if (error) console.error('error!', error);
-    
+
     let context = {
       loggedIn: loggedIn,
       username: username,

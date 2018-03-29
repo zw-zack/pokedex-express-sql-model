@@ -21,22 +21,30 @@
 
 const updateForm = (db) => {
   return (request, response) => {
-    const queryString = 'SELECT * from pokemons WHERE id = $1'
-    const values = [request.params.id];
-    console.log(db);
-    db.pool.options.query(queryString, values, (error, queryResult)=>{
-      if (error){
-        console.error('query error: ', err.stack);
-      } else{
-        response.render('pokemon/edit', {pokemon: queryResult.rows[0]})
+    // TODO: Add logic here
+    db.pokemon.updateForm(request.params.id, (error, queryResult) =>{
+      if (error) {
+        console.error('query error: ', error.stack);
+      } else {
+        response.render('pokemon/edit', { pokemon: queryResult.rows[0] });
+        // console.log(queryResult);
       }
-    });    // TODO: Add logic here
-
+    });
   };
 };
 
 const update = (db) => {
   return (request, response) => {
+    db.pokemon.update(request.body, (error, queryResult)=>{
+      if (error){
+        console.error('query error: ', error.stack);
+      } else{
+        // response.render('pokemon/edit', { pokemon: queryResult.rows[0] });
+        // console.log(queryResult);
+        // response.send("Pokemon updated!")
+      }
+      response.redirect('/');
+    });
     // TODO: Add logic here
   };
 };
